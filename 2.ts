@@ -1,10 +1,28 @@
-console.log(valueAtPos0AfterHalt(getInput()))
+console.log(problem1(getInput()))
+console.log(problem2(getInput()))
 
-function valueAtPos0AfterHalt(input: string): number {
+function problem2(input: string): number {
     let instructions: number[] = parseInput(input)
 
-    instructions[1] = 12
-    instructions[2] = 2
+    for (let noun = 0; noun < 100; noun++) {
+        for (let verb = 0; verb < 100; verb++) {
+            if (valueAtPos0AfterHalt([...instructions], noun, verb) === 19690720) {
+                return 100 * noun + verb
+            }
+        }
+    }
+}
+
+function problem1(input: string) {
+    let instructions: number[] = parseInput(input)
+    return valueAtPos0AfterHalt(instructions, 12, 2)
+}
+
+
+function valueAtPos0AfterHalt(instructions: number[], noun: number, verb: number): number {
+
+    instructions[1] = noun
+    instructions[2] = verb
 
     let opPointer = 0
     let opCode = instructions[opPointer];
